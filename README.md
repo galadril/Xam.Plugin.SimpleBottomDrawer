@@ -1,4 +1,4 @@
-[![xam-plugin-simplebottomdrawer MyGet Build Status](https://www.myget.org/BuildSource/Badge/xam-plugin-simplebottomdrawer?identifier=bf5f13ba-cf47-4f75-8a63-728714c84446)](https://www.myget.org/)
+![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)
 
 # Xam.Plugin.SimpleBottomDrawer
 Just a nice and simple BottomDrawer for your Xamarin Forms project 
