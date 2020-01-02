@@ -8,7 +8,7 @@ Just a nice and simple BottomDrawer for your Xamarin Forms project
 * Available on Nuget:
 https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer
 
-!!Install into your .net standaard Forms project. !!
+!!Install into your .net standard Forms project. !!
 
 
 # Example
