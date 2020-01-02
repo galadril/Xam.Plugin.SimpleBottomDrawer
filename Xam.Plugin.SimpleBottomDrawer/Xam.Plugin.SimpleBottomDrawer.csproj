@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>galadril</Authors>
+    <Description>Just a nice and simple AppIntro for your Xamarin Forms project</Description>
+    <Copyright>Mark Heinis</Copyright>
+    <PackageLicenseUrl>https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer</PackageProjectUrl>
+    <RepositoryUrl>https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer</RepositoryUrl>
+    <PackageTags>Xamarin, Xamarin Forms, Forms, App Intro, Intro, App</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.1</Version>
+    <ApplicationIcon />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AnimatedSimpleBottomDrawer.xaml.cs">
+      <DependentUpon>AnimatedSimpleBottomDrawer.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="SimpleBottomDrawer.xaml.cs">
+      <DependentUpon>SimpleBottomDrawer.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AnimatedCheckboxSlideView.xaml.cs">
+      <DependentUpon>AnimatedCheckboxSlideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AnimatedSwitchSlideView.xaml.cs">
+      <DependentUpon>AnimatedSwitchSlideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AnimatedButtonSlideView.xaml.cs">
+      <DependentUpon>AnimatedButtonSlideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ButtonSlideView.xaml.cs">
+      <DependentUpon>ButtonSlideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CheckboxSlideView.xaml.cs">
+      <DependentUpon>CheckboxSlideView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SwitchSlideView.xaml.cs">
+      <DependentUpon>SwitchSlideView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AnimatedSlideView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SimpleBottomDrawer.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SlideView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
