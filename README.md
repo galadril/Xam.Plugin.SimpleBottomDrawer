@@ -1,4 +1,4 @@
-![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)
+[![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer)
 
 # Xam.Plugin.SimpleBottomDrawer
 Just a nice and simple BottomDrawer for your Xamarin Forms project 
