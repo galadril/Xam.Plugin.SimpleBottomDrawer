@@ -21,6 +21,7 @@ You can now use the BottomDrawer to create a panel like this:
 
 ```
 
+    <RelativeLayout>
   <controls:BottomDrawer
                 Padding="1,4,1,0"
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
@@ -69,6 +70,7 @@ You can now use the BottomDrawer to create a panel like this:
 					
 	</controls:BottomDrawer>
 
+    </RelativeLayout>
 ```
 
 
