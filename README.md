@@ -12,7 +12,8 @@ https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer
 
 
 # Example
-![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71671740-1c271100-2d74-11ea-8e89-9843eb5ef88e.gif)
+![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71672219-a623a980-2d75-11ea-8377-0f5e272a9f3c.gif)
+
 
 
 # Usage
