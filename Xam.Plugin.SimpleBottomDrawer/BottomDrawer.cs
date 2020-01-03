@@ -12,7 +12,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
         private double _height;
         public static readonly BindableProperty IsExpandedProperty = BindableProperty.Create(nameof(IsExpanded), typeof(bool), typeof(BottomDrawer), false, BindingMode.TwoWay,
            propertyChanged: IsExpandedPropertyChanged);
-        public static readonly BindableProperty ExpendedPercentageProperty = BindableProperty.Create(nameof(ExpendedPercentage), typeof(double), typeof(BottomDrawer), defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty ExpandedPercentageProperty = BindableProperty.Create(nameof(ExpandedPercentage), typeof(double), typeof(BottomDrawer), defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnExtendedPercentageChanged);
         
         public BottomDrawer()
         {
@@ -31,10 +31,10 @@ namespace Xam.Plugin.SimpleBottomDrawer
             set => SetValue(IsExpandedProperty, value);
         }
 
-        public double ExpendedPercentage
+        public double ExpandedPercentage
         {
-            get => (double)GetValue(ExpendedPercentageProperty);
-            set => SetValue(ExpendedPercentageProperty, value);
+            get => (double)GetValue(ExpandedPercentageProperty);
+            set => SetValue(ExpandedPercentageProperty, value);
         }
         
         protected override void OnSizeAllocated(double width, double height)
@@ -59,6 +59,18 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
         }
 
+        private static void OnExtendedPercentageChanged(BindableObject bindable, object o, object n)
+        {
+            if (n is double expandValue && bindable is BottomDrawer drawer)
+            {
+                var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(drawer.getProportionCoordinate(expandValue)));
+                if (expandValue < 0)
+                    drawer.TranslateTo(drawer.X, finalTranslation, 250, Easing.SpringIn);
+                else
+                    drawer.TranslateTo(drawer.X, finalTranslation, 250, Easing.SpringOut);
+            }
+        }
+
         private void OnPanChanged(object sender, PanUpdatedEventArgs e)
         {
             switch (e.StatusType)
@@ -66,7 +78,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
                 case GestureStatus.Running:
                     var translateY = Math.Max(Math.Min(0, this.TranslationY + e.TotalY), -Math.Abs((Height * .25) - Height));
                     this.TranslateTo(this.X, translateY, 20);
-                    ExpendedPercentage = GetPropertionDistance(e.TotalY + this.TranslationY);
+                    ExpandedPercentage = GetPropertionDistance(e.TotalY + this.TranslationY);
                     break;
                 case GestureStatus.Completed:
                     var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(GetClosestLockState(e.TotalY + this.TranslationY))));
@@ -74,13 +86,13 @@ namespace Xam.Plugin.SimpleBottomDrawer
                         this.TranslateTo(this.X, finalTranslation, 250, Easing.SpringIn);
                     else
                         this.TranslateTo(this.X, finalTranslation, 250, Easing.SpringOut);
-                    ExpendedPercentage = GetClosestLockState(e.TotalY + this.TranslationY);
+                    ExpandedPercentage = GetClosestLockState(e.TotalY + this.TranslationY);
                     break;
             }
 
-            if (ExpendedPercentage > lockStates[lockStates.Length - 1])
-                ExpendedPercentage = lockStates[lockStates.Length - 1];
-            IsExpanded = ExpendedPercentage > 0;
+            if (ExpandedPercentage > lockStates[lockStates.Length - 1])
+                ExpandedPercentage = lockStates[lockStates.Length - 1];
+            IsExpanded = ExpandedPercentage > 0;
         }
         
         private double GetClosestLockState(double TranslationY)

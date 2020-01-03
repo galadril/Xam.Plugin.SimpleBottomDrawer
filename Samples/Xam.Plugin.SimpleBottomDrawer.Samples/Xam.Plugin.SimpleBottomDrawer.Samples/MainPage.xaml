@@ -14,20 +14,45 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <RelativeLayout>
-            <StackLayout Padding="20" Spacing="0">
-                <StackLayout Orientation="Horizontal">
+        <RelativeLayout HorizontalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" Spacing="0">
+
+                <StackLayout
+                    Padding="20"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding IsExpanded}" />
                     <Label Text="Is the bottom drawer expanded" VerticalOptions="Center" />
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
+
+                <StackLayout
+                    Padding="20,-20,20,20"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding IsVisible}" />
                     <Label Text="Is the bottom drawer visible" VerticalOptions="Center" />
+                </StackLayout>
+
+                <BoxView
+                    BackgroundColor="#D1D6DB"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand" />
+
+                <StackLayout
+                    Padding="20"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Vertical">
+                    <Label
+                        Margin="0"
+                        Text="Set a percentage (0.5 or 0.75 for example)"
+                        VerticalOptions="Center" />
+                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding ExpandedPercentage}" />
                 </StackLayout>
             </StackLayout>
 
             <controls:BottomDrawer
                 Padding="1,4,1,0"
+                ExpandedPercentage="{Binding ExpandedPercentage}"
                 IsExpanded="{Binding IsExpanded}"
                 IsVisible="{Binding IsVisible}"
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
@@ -42,7 +67,6 @@
                                                                   Property=Height,
                                                                   Factor=.9,
                                                                   Constant=0}">
-
                 <StackLayout Spacing="6">
                     <BoxView
                         Margin="20,16,20,5"
@@ -52,25 +76,20 @@
                         HorizontalOptions="Center"
                         WidthRequest="80" />
                     <Label
-                        Padding="20,0,20,0"
+                        Margin="20,0,20,0"
                         FontAttributes="Bold"
                         FontSize="18"
                         Text="This is a Title"
                         TextColor="#144260" />
-
                     <ScrollView>
                         <StackLayout Spacing="0">
-
                             <Label
-                                Padding="20"
+                                Margin="20"
                                 FontSize="Subtitle"
                                 HorizontalOptions="Start"
                                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ex justo. Maecenas in " />
-
                             <Entry Text="Sample entry" />
-
                             <Button Text="Click" />
-
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
