@@ -16,7 +16,9 @@ https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer
 This control | Google Maps
 --- | --- 
 ![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71714517-81c7db80-2e0e-11ea-81aa-5c773ccac633.gif) | ![ezgif-6-4d6ddeae8d68](https://user-images.githubusercontent.com/14561640/71723319-7f747a00-2e2c-11ea-9091-bb4e87935215.gif)
-The content of the Bottom Drawer is completely via xaml to your preferences!!
+ 
+ 
+ The content of the Bottom Drawer is completely via xaml to your preferences!!
 
 
 # Usage
