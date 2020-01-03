@@ -15,16 +15,37 @@
 
     <ContentPage.Content>
         <RelativeLayout HorizontalOptions="FillAndExpand">
-            <StackLayout HorizontalOptions="FillAndExpand" Spacing="0">
 
+            <!--  Shadow view  -->
+            <ContentView
+                BackgroundColor="#222222"
+                IsVisible="{Binding ShowShadow}"
+                Opacity="{Binding ExpandedPercentage}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                       Property=Height,
+                                                                       Factor=1,
+                                                                       Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                      Property=Width,
+                                                                      Factor=1,
+                                                                      Constant=0}" />
+
+
+            <StackLayout HorizontalOptions="FillAndExpand" Spacing="0">
                 <StackLayout
                     Padding="20"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding ShowShadow}" />
+                    <Label Text="Show shadow" VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout
+                    Padding="20,-20,20,20"
                     HorizontalOptions="FillAndExpand"
                     Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding IsExpanded}" />
                     <Label Text="Is the bottom drawer expanded" VerticalOptions="Center" />
                 </StackLayout>
-
                 <StackLayout
                     Padding="20,-20,20,20"
                     HorizontalOptions="FillAndExpand"
@@ -32,12 +53,10 @@
                     <CheckBox IsChecked="{Binding IsVisible}" />
                     <Label Text="Is the bottom drawer visible" VerticalOptions="Center" />
                 </StackLayout>
-
                 <BoxView
                     BackgroundColor="#D1D6DB"
                     HeightRequest="1"
                     HorizontalOptions="FillAndExpand" />
-
                 <StackLayout
                     Padding="20"
                     HorizontalOptions="FillAndExpand"
@@ -50,6 +69,7 @@
                 </StackLayout>
             </StackLayout>
 
+            <!--  Bottom drawer control  -->
             <controls:BottomDrawer
                 Padding="1,4,1,0"
                 ExpandedPercentage="{Binding ExpandedPercentage}"
@@ -67,6 +87,8 @@
                                                                   Property=Height,
                                                                   Factor=.9,
                                                                   Constant=0}">
+
+                <!--  Bottom drawer content  -->
                 <StackLayout Spacing="6">
                     <BoxView
                         Margin="20,16,20,5"
@@ -82,13 +104,12 @@
                         Text="This is a Title"
                         TextColor="#144260" />
                     <ScrollView>
-                        <StackLayout Spacing="0">
+                        <StackLayout Margin="20" Spacing="0">
                             <Label
-                                Margin="20"
                                 FontSize="Subtitle"
                                 HorizontalOptions="Start"
                                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ex justo. Maecenas in " />
-                            <Entry Text="Sample entry" />
+                            <Entry Placeholder="Entry data" />
                             <Button Text="Click" />
                         </StackLayout>
                     </ScrollView>

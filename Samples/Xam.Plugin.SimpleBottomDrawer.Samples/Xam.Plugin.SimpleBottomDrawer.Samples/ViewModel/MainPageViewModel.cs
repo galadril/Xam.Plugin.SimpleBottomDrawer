@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
 {
     class MainPageViewModel : INotifyPropertyChanged
     {
         private bool _IsExpanded;
+        private bool _ShowShadow = true;
         private bool _IsVisible = true;
         private double _ExpandedPercentage = 0;
+        private double _OverlayOpacity = 0;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,6 +32,22 @@ namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
             get
             {
                 return _ExpandedPercentage;
+            }
+        }
+
+        public double OverlayOpacity
+        {
+            set
+            {
+                if (_OverlayOpacity != value)
+                {
+                    _OverlayOpacity = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("OverlayOpacity"));
+                }
+            }
+            get
+            {
+                return _OverlayOpacity;
             }
         }
 
@@ -65,6 +80,22 @@ namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
             get
             {
                 return _IsVisible;
+            }
+        }
+
+        public bool ShowShadow
+        {
+            set
+            {
+                if (_ShowShadow != value)
+                {
+                    _ShowShadow = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShowShadow"));
+                }
+            }
+            get
+            {
+                return _ShowShadow;
             }
         }
     }
