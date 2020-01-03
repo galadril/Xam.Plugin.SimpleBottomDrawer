@@ -13,7 +13,7 @@ https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer
 
 
 # Example
-![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71714485-6230b300-2e0e-11ea-89d1-8324c8a248e2.gif)
+![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71714517-81c7db80-2e0e-11ea-81aa-5c773ccac633.gif)
 
 
 
