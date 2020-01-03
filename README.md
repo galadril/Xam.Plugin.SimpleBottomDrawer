@@ -1,5 +1,6 @@
 [![xam-plugin-simplebottomdrawer MyGet Build Status](https://www.myget.org/BuildSource/Badge/xam-plugin-simplebottomdrawer?identifier=bf5f13ba-cf47-4f75-8a63-728714c84446)](https://www.myget.org/) [![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) [![GitHub forks](https://img.shields.io/github/forks/galadril/Xam.Plugin.SimpleBottomDrawer)](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/network) [![GitHub stars](https://img.shields.io/github/stars/galadril/Xam.Plugin.SimpleBottomDrawer)](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/stargazers)
 
+
 # Xam.Plugin.SimpleBottomDrawer
 Just a nice and simple BottomDrawer for your Xamarin Forms project 
 
@@ -12,7 +13,7 @@ https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer
 
 
 # Example
-![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71672219-a623a980-2d75-11ea-8377-0f5e272a9f3c.gif)
+![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71714485-6230b300-2e0e-11ea-89d1-8324c8a248e2.gif)
 
 
 
