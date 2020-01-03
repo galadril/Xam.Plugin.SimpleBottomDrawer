@@ -1,4 +1,4 @@
-[![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) [![GitHub forks](https://img.shields.io/github/forks/galadril/Xam.Plugin.SimpleBottomDrawer)](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/network) [![GitHub stars](https://img.shields.io/github/stars/galadril/Xam.Plugin.SimpleBottomDrawer)](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/stargazers)
+[![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) 
 
 
 # Xam.Plugin.SimpleBottomDrawer
