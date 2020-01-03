@@ -4,12 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>galadril</Authors>
-    <Description>Just a nice and simple AppIntro for your Xamarin Forms project</Description>
+    <Description>Just a nice and simple bottom drawer for your Xamarin Forms project</Description>
     <Copyright>Mark Heinis</Copyright>
-    <PackageLicenseUrl>https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer</PackageProjectUrl>
     <RepositoryUrl>https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer</RepositoryUrl>
-    <PackageTags>Xamarin, Xamarin Forms, Forms, App Intro, Intro, App</PackageTags>
+    <PackageTags>Xamarin, Xamarin Forms, Forms, App, Drawer, Navigation, Bottom, Bottom drawer, BottomDrawer</PackageTags>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Version>1.0.1</Version>
