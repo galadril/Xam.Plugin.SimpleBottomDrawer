@@ -97,20 +97,32 @@
                         HeightRequest="5"
                         HorizontalOptions="Center"
                         WidthRequest="80" />
+
                     <Label
                         Margin="20,0,20,0"
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="This is a Title"
-                        TextColor="#144260" />
+                        Text="Title" />
+
                     <ScrollView>
-                        <StackLayout Margin="20" Spacing="0">
+                        <StackLayout Spacing="0">
                             <Label
+                                Margin="20,20,20,0"
                                 FontSize="Subtitle"
                                 HorizontalOptions="Start"
                                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ex justo. Maecenas in " />
-                            <Entry Placeholder="Entry data" />
-                            <Button Text="Click" />
+                            <Label
+                                Margin="20,20,20,0"
+                                FontSize="Subtitle"
+                                HorizontalOptions="Start"
+                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ex justo. Maecenas in " />
+                            <Label
+                                Margin="20,20,20,0"
+                                FontSize="Subtitle"
+                                HorizontalOptions="Start"
+                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at ex justo. Maecenas in " />
+                            <Entry Margin="20,20,20,0" Placeholder="Entry data" />
+                            <Button Margin="20,20,20,0" Text="Click" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
