@@ -1,7 +1,8 @@
-[![xam-plugin-simplebottomdrawer MyGet Build Status](https://www.myget.org/BuildSource/Badge/xam-plugin-simplebottomdrawer?identifier=bf5f13ba-cf47-4f75-8a63-728714c84446)](https://www.myget.org/) [![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) [![GitHub forks](https://img.shields.io/github/forks/galadril/Xam.Plugin.SimpleBottomDrawer)](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/network) [![GitHub stars](https://img.shields.io/github/stars/galadril/Xam.Plugin.SimpleBottomDrawer)](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/stargazers)
+[![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) 
+
 
 # Xam.Plugin.SimpleBottomDrawer
-Just a nice and simple BottomDrawer for your Xamarin Forms project 
+Just a nice and simple BottomDrawer for your Xamarin Forms project, like how it is implemented on Google Maps.
 
 
 # Setup
@@ -12,8 +13,12 @@ https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer
 
 
 # Example
-![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71672219-a623a980-2d75-11ea-8377-0f5e272a9f3c.gif)
-
+This control | Google Maps
+--- | --- 
+![simplebottomdrawer](https://user-images.githubusercontent.com/14561640/71714517-81c7db80-2e0e-11ea-81aa-5c773ccac633.gif) | ![ezgif-6-4d6ddeae8d68](https://user-images.githubusercontent.com/14561640/71723319-7f747a00-2e2c-11ea-9091-bb4e87935215.gif)
+ 
+ 
+ The content of the Bottom Drawer is completely via xaml to your preferences!!
 
 
 # Usage
@@ -86,6 +91,7 @@ You can set/use the next properties
 ```
 
 (see sample project)
+
 
 
 
