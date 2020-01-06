@@ -12,7 +12,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
         private double _height;
         public static readonly BindableProperty IsExpandedProperty = BindableProperty.Create(nameof(IsExpanded), typeof(bool), typeof(BottomDrawer), false, BindingMode.TwoWay,
            propertyChanged: IsExpandedPropertyChanged);
-        public static readonly BindableProperty ExpandedPercentageProperty = BindableProperty.Create(nameof(ExpandedPercentage), typeof(double), typeof(BottomDrawer), defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnExtendedPercentageChanged);
+        public static readonly BindableProperty ExpandedPercentageProperty = BindableProperty.Create(nameof(ExpandedPercentage), typeof(double), typeof(BottomDrawer), defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnExpandedPercentageChanged);
         
         public BottomDrawer()
         {
@@ -23,6 +23,9 @@ namespace Xam.Plugin.SimpleBottomDrawer
             var panGestures = new PanGestureRecognizer();
             panGestures.PanUpdated += OnPanChanged;
             GestureRecognizers.Add(panGestures);
+            var tapGestures = new TapGestureRecognizer();
+            tapGestures.Tapped += OnTapped;
+            GestureRecognizers.Add(tapGestures);
         }
         
         public bool IsExpanded
@@ -47,6 +50,14 @@ namespace Xam.Plugin.SimpleBottomDrawer
                 IsExpanded = false;
             }
         }
+        private void OnTapped(object sender, EventArgs e)
+        {
+            if (!IsExpanded)
+            {
+                ExpandedPercentage = lockStates[1];
+                IsExpanded = ExpandedPercentage > 0;
+            }
+        }
 
         private static void IsExpandedPropertyChanged(BindableObject bindable, object o, object n)
         {
@@ -59,7 +70,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
         }
 
-        private static void OnExtendedPercentageChanged(BindableObject bindable, object o, object n)
+        private static void OnExpandedPercentageChanged(BindableObject bindable, object o, object n)
         {
             if (n is double expandValue && bindable is BottomDrawer drawer)
             {
