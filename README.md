@@ -1,4 +1,4 @@
-[![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) 
+[![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) ![Nuget](https://img.shields.io/nuget/dt/Xam.Plugin.SimpleBottomDrawer)
 
 
 # Xam.Plugin.SimpleBottomDrawer
