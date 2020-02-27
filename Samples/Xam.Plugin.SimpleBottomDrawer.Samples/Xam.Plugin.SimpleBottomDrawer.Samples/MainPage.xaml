@@ -19,8 +19,8 @@
             <!--  Shadow view  -->
             <ContentView
                 BackgroundColor="#222222"
-                IsVisible="{Binding ShowShadow}"
-                Opacity="{Binding ExpandedPercentage}"
+                IsVisible="{Binding IsExpanded}"
+                Opacity="{Binding OverlayOpacity}"
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=1,
@@ -28,8 +28,11 @@
                 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                       Property=Width,
                                                                       Factor=1,
-                                                                      Constant=0}" />
-
+                                                                      Constant=0}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackgroundClicked}" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
 
             <StackLayout HorizontalOptions="FillAndExpand" Spacing="0">
                 <StackLayout
@@ -71,7 +74,8 @@
 
             <!--  Bottom drawer control  -->
             <controls:BottomDrawer
-                Padding="1,4,1,0"
+                Padding="0"
+                BackgroundColor="White"
                 ExpandedPercentage="{Binding ExpandedPercentage}"
                 IsExpanded="{Binding IsExpanded}"
                 IsVisible="{Binding IsVisible}"
@@ -85,8 +89,8 @@
                                                                       Constant=0}"
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                   Property=Height,
-                                                                  Factor=.9,
-                                                                  Constant=0}">
+                                                                  Factor=1,
+                                                                  Constant=-65}">
 
                 <!--  Bottom drawer content  -->
                 <StackLayout Spacing="6">
