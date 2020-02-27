@@ -1,15 +1,18 @@
 ﻿using System.ComponentModel;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
 {
     class MainPageViewModel : INotifyPropertyChanged
     {
+        private const double MaxOpacity = 0.5;
         private bool _IsExpanded;
         private bool _ShowShadow = true;
         private bool _IsVisible = true;
         private double _ExpandedPercentage = 0;
         private double _OverlayOpacity = 0;
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public MainPageViewModel()
@@ -17,6 +20,7 @@ namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
             IsExpanded = false;
             IsVisible = true;
             ExpandedPercentage = 0;
+            BackgroundClicked = new Command(() => IsExpanded = false);
         }
 
         public double ExpandedPercentage
@@ -27,6 +31,7 @@ namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
                 {
                     _ExpandedPercentage = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ExpandedPercentage"));
+                    OverlayOpacity = MaxOpacity < value ? MaxOpacity : value;
                 }
             }
             get
@@ -98,5 +103,7 @@ namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
                 return _ShowShadow;
             }
         }
+
+        public ICommand BackgroundClicked { get; private set; }
     }
 }
