@@ -1,109 +1,116 @@
-﻿using System.ComponentModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using Xam.Plugin.SimpleBottomDrawer.Samples.Helpers;
 using Xamarin.Forms;
 
 namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
 {
-    class MainPageViewModel : INotifyPropertyChanged
+    /// <summary>
+    /// View model to demonstrate the <see cref="BottomDrawer"/> control
+    /// </summary>
+    public class MainPageViewModel : ObservableObject
     {
-        private const double MaxOpacity = 0.5;
-        private bool _IsExpanded;
-        private bool _ShowShadow = true;
-        private bool _IsVisible = true;
-        private double _ExpandedPercentage = 0;
-        private double _OverlayOpacity = 0;
-        
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Variables
 
+        /// <summary>
+        /// variable for the max opacity value
+        /// </summary>
+        private const double MaxOpacity = 0.5;
+
+        /// <summary>
+        /// Is expanded value
+        /// </summary>
+        private bool _IsExpanded;
+
+        /// <summary>
+        /// Is visible value
+        /// </summary>
+        private bool _IsVisible = true;
+
+        /// <summary>
+        /// Is Y value
+        /// </summary>
+        private double _ExpandedPercentage;
+
+        /// <summary>
+        /// Is overlay visible / opacity
+        /// </summary>
+        private double _OverlayOpacity;
+
+        /// <summary>
+        /// The bottom drawer lock states
+        /// </summary>
+        private double[] _LockStates = new double[] { 0, .50, 0.75 };
+
+        #endregion
+
+        #region Constructor & Destructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainPageViewModel()
         {
-            IsExpanded = false;
-            IsVisible = true;
-            ExpandedPercentage = 0;
             BackgroundClicked = new Command(() => IsExpanded = false);
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// On background clicked
+        /// </summary>
+        public ICommand BackgroundClicked { get; private set; }
+
+        /// <summary>
+        /// Is ExpandedPercentage
+        /// </summary>
         public double ExpandedPercentage
         {
+            get => _ExpandedPercentage;
             set
             {
-                if (_ExpandedPercentage != value)
-                {
-                    _ExpandedPercentage = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ExpandedPercentage"));
-                    OverlayOpacity = MaxOpacity < value ? MaxOpacity : value;
-                }
-            }
-            get
-            {
-                return _ExpandedPercentage;
+                SetProperty(ref _ExpandedPercentage, value);
+                OverlayOpacity = MaxOpacity < value ? MaxOpacity : value;
             }
         }
 
-        public double OverlayOpacity
+        /// <summary>
+        /// Lock states
+        /// </summary>
+        public double[] LockStates
         {
-            set
-            {
-                if (_OverlayOpacity != value)
-                {
-                    _OverlayOpacity = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("OverlayOpacity"));
-                }
-            }
-            get
-            {
-                return _OverlayOpacity;
-            }
+            get => _LockStates;
+            set => SetProperty(ref _LockStates, value);
         }
 
+        /// <summary>
+        /// Is expanded
+        /// </summary>
         public bool IsExpanded
         {
-            set
-            {
-                if (_IsExpanded != value)
-                {
-                    _IsExpanded = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsExpanded"));
-                }
-            }
-            get
-            {
-                return _IsExpanded;
-            }
+            get => _IsExpanded;
+            set => SetProperty(ref _IsExpanded, value);
         }
 
+        /// <summary>
+        /// Is visible
+        /// </summary>
         public bool IsVisible
         {
-            set
-            {
-                if (_IsVisible != value)
-                {
-                    _IsVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsVisible"));
-                }
-            }
-            get
-            {
-                return _IsVisible;
-            }
+            get => _IsVisible;
+            set => SetProperty(ref _IsVisible, value);
         }
 
-        public bool ShowShadow
+        /// <summary>
+        /// Is layout opacity value
+        /// </summary>
+        public double OverlayOpacity
         {
-            set
-            {
-                if (_ShowShadow != value)
-                {
-                    _ShowShadow = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ShowShadow"));
-                }
-            }
-            get
-            {
-                return _ShowShadow;
-            }
+            get => _OverlayOpacity;
+            set => SetProperty(ref _OverlayOpacity, value);
         }
 
-        public ICommand BackgroundClicked { get; private set; }
+        #endregion
     }
 }
