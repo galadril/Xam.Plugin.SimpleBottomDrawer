@@ -13,6 +13,8 @@
     <FileVersion>1.0.0.0</FileVersion>
     <Version>1.0.1</Version>
     <ApplicationIcon />
+    <PackageIcon>ic_launcher.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
@@ -57,5 +59,12 @@
     <EmbeddedResource Update="Views\SlideView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Samples\Xam.Plugin.SimpleBottomDrawer.Samples\Xam.Plugin.SimpleBottomDrawer.Samples.Android\Resources\mipmap-xxhdpi\ic_launcher.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
