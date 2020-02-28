@@ -84,16 +84,16 @@ You can now use the BottomDrawer to create a panel like this:
 ```
 
 
-
 # Properties
 You can set/use the next properties
 
 ```
                 ExpendedPercentage="{Binding ExpendedPercentage}"
                 IsExpanded="{Binding IsExpanded}"
-                IsVisible="{Binding IsVisible}"
+                LockStates="{Binding LockStates}"
 
 ```
+
 
 (see sample project)
 
