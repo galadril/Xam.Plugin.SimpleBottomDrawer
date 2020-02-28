@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:Xam.Plugin.SimpleBottomDrawer;assembly=Xam.Plugin.SimpleBottomDrawer"
     xmlns:local="clr-namespace:Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel;assembly=Xam.Plugin.SimpleBottomDrawer.Samples"
+    x:Name="bottomDrawerPage"
     Title="Sample SimpleBottomDrawer"
     BackgroundColor="#F0F0F0"
     Visual="Material">
@@ -14,9 +15,18 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <RelativeLayout HorizontalOptions="FillAndExpand">
+        <RelativeLayout>
+            <StackLayout Padding="20" Spacing="0">
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsExpanded}" />
+                    <Label Text="Set IsExpanded" VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding IsVisible}" />
+                    <Label Text="Set IsVisible" VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
 
-            <!--  Shadow view  -->
             <ContentView
                 BackgroundColor="#222222"
                 IsVisible="{Binding IsExpanded}"
@@ -34,45 +44,6 @@
                 </ContentView.GestureRecognizers>
             </ContentView>
 
-            <StackLayout HorizontalOptions="FillAndExpand" Spacing="0">
-                <StackLayout
-                    Padding="20"
-                    HorizontalOptions="FillAndExpand"
-                    Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding ShowShadow}" />
-                    <Label Text="Show shadow" VerticalOptions="Center" />
-                </StackLayout>
-                <StackLayout
-                    Padding="20,-20,20,20"
-                    HorizontalOptions="FillAndExpand"
-                    Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding IsExpanded}" />
-                    <Label Text="Is the bottom drawer expanded" VerticalOptions="Center" />
-                </StackLayout>
-                <StackLayout
-                    Padding="20,-20,20,20"
-                    HorizontalOptions="FillAndExpand"
-                    Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding IsVisible}" />
-                    <Label Text="Is the bottom drawer visible" VerticalOptions="Center" />
-                </StackLayout>
-                <BoxView
-                    BackgroundColor="#D1D6DB"
-                    HeightRequest="1"
-                    HorizontalOptions="FillAndExpand" />
-                <StackLayout
-                    Padding="20"
-                    HorizontalOptions="FillAndExpand"
-                    Orientation="Vertical">
-                    <Label
-                        Margin="0"
-                        Text="Set a percentage (0.5 or 0.75 for example)"
-                        VerticalOptions="Center" />
-                    <Entry HorizontalOptions="FillAndExpand" Text="{Binding ExpandedPercentage}" />
-                </StackLayout>
-            </StackLayout>
-
-            <!--  Bottom drawer control  -->
             <controls:BottomDrawer
                 Padding="0"
                 BackgroundColor="White"
@@ -92,21 +63,20 @@
                                                                   Factor=1,
                                                                   Constant=-65}">
 
-                <!--  Bottom drawer content  -->
-                <StackLayout Spacing="6">
+                <StackLayout Spacing="0">
                     <BoxView
-                        Margin="20,16,20,5"
-                        BackgroundColor="#D1D6DB"
+                        Margin="20,16,20,-5"
+                        BackgroundColor="Gray"
                         CornerRadius="2"
-                        HeightRequest="5"
+                        HeightRequest="3"
                         HorizontalOptions="Center"
                         WidthRequest="80" />
-
                     <Label
-                        Margin="20,0,20,0"
+                        Margin="16"
                         FontAttributes="Bold"
                         FontSize="18"
-                        Text="Title" />
+                        Text="Overview"
+                        TextColor="#003154" />
 
                     <ScrollView>
                         <StackLayout Spacing="0">

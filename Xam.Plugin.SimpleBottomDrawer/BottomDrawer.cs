@@ -4,17 +4,53 @@ using Xamarin.Forms.Internals;
 
 namespace Xam.Plugin.SimpleBottomDrawer
 {
+    /// <summary>
+    /// Bottom drawer control with a border
+    /// </summary>
     [Preserve(AllMembers = true)]
     public class BottomDrawer : Frame
     {
+        #region Variables
+
+        /// <summary>
+        /// Is the drawer being dragged
+        /// </summary>
         private bool isDragging = false;
+
+        /// <summary>
+        /// Get width
+        /// </summary>
         private double _width;
+
+        /// <summary>
+        /// Get height
+        /// </summary>
         private double _height;
+
+        /// <summary>
+        /// Bindable property for the <see cref="IsExpanded"/> property
+        /// </summary>
         public static readonly BindableProperty IsExpandedProperty = BindableProperty.Create(nameof(IsExpanded), typeof(bool), typeof(BottomDrawer), false, BindingMode.TwoWay,
            propertyChanged: IsExpandedPropertyChanged);
+
+        /// <summary>
+        /// Bindable property for the <see cref="ExpandedPercentage"/> property
+        /// </summary>
         public static readonly BindableProperty ExpandedPercentageProperty = BindableProperty.Create(nameof(ExpandedPercentage), typeof(double), typeof(BottomDrawer), defaultBindingMode: BindingMode.TwoWay, propertyChanged: ExpandedPercentageChanged);
+
+        /// <summary>
+        /// Bindable property for the <see cref="ExpandedPercentage"/> property
+        /// </summary>
         public static readonly BindableProperty LockStatesProperty = BindableProperty.Create(nameof(LockStates), typeof(double[]), typeof(BottomDrawer), new double[] { 0, .4, .75 });
 
+        #endregion Variables
+
+
+        #region Constructor & Destructor
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public BottomDrawer()
         {
             // Set the default values for this control
@@ -32,6 +68,12 @@ namespace Xam.Plugin.SimpleBottomDrawer
             tapGestures.Tapped += OnTapped;
             GestureRecognizers.Add(tapGestures);
         }
+
+        #endregion
+
+
+        #region Properties
+
 
         /// <summary>
         /// Gets or sets the lock statues
@@ -60,6 +102,14 @@ namespace Xam.Plugin.SimpleBottomDrawer
             set => SetValue(ExpandedPercentageProperty, value);
         }
 
+        #endregion
+
+
+        #region Protected
+
+        /// <summary>
+        /// Make sure we collapse the view on orientation change
+        /// </summary>
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
@@ -71,6 +121,17 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
         }
 
+        #endregion Protected
+
+
+        #region Private
+
+        /// <summary>
+        /// Handle the change of the <see cref="IsExpanded"/> property
+        /// </summary>
+        /// <param name="bindable">The bindable object</param>
+        /// <param name="o">The old value</param>
+        /// <param name="n">The new value</param>
         private static void IsExpandedPropertyChanged(BindableObject bindable, object o, object n)
         {
             if (n is bool isExpanded && bindable is BottomDrawer drawer)
@@ -85,6 +146,12 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
         }
 
+        /// <summary>
+        /// Handle the change of the <see cref="ExpandedPercentage"/> property
+        /// </summary>
+        /// <param name="bindable">The bindable object</param>
+        /// <param name="o">The old value</param>
+        /// <param name="n">The new value</param>
         private static void ExpandedPercentageChanged(BindableObject bindable, object o, object n)
         {
             if (n is double expandValue && bindable is BottomDrawer drawer)
@@ -100,6 +167,9 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
         }
 
+        /// <summary>
+        /// On pan gesture changed
+        /// </summary>
         private void OnPanChanged(object sender, PanUpdatedEventArgs e)
         {
             switch (e.StatusType)
@@ -130,6 +200,9 @@ namespace Xam.Plugin.SimpleBottomDrawer
             IsExpanded = ExpandedPercentage > 0;
         }
 
+        /// <summary>
+        /// On tapped event
+        /// </summary>
         private void OnTapped(object sender, EventArgs e)
         {
             if (!IsExpanded)
@@ -139,11 +212,17 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
         }
 
+        /// <summary>
+        /// Check if the action is a swipe up
+        /// </summary>
         private bool DetectSwipeUp(PanUpdatedEventArgs e)
         {
             return e.TotalY < 0;
         }
 
+        /// <summary>
+        /// Find the closest lock state when swip is finished
+        /// </summary>
         private double GetClosestLockState(double TranslationY)
         {
             // Play with these values to adjust the locking motions - this will change depending on the amount of content ona  apge
@@ -167,15 +246,26 @@ namespace Xam.Plugin.SimpleBottomDrawer
             return LockStates[closestIndex];
         }
 
+        /// <summary>
+        /// Get the current proportion of the sheet in relation to the screen
+        /// </summary>
         private double GetPropertionDistance(double TranslationY)
         {
             return Math.Abs(TranslationY) / Height;
         }
 
+        /// <summary>
+        /// Get proportion coordinates
+        /// </summary>
         private double getProportionCoordinate(double proportion)
         {
             return proportion * Height;
         }
+
+        #endregion
+
+
+        #region Public
 
         /// <summary>
         /// Dismiss the bottom drawer
@@ -194,5 +284,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
             var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(LockStates[LockStates.Length - 1])));
             this.TranslateTo(this.X, finalTranslation, 150, Easing.SpringIn);
         }
+
+        #endregion Public
     }
 }
