@@ -1,5 +1,6 @@
 [![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) ![Nuget](https://img.shields.io/nuget/dt/Xam.Plugin.SimpleBottomDrawer)
 
+[![Icon](https://raw.githubusercontent.com/galadril/Xam.Plugin.SimpleBottomDrawer/master/Samples/Xam.Plugin.SimpleBottomDrawer.Samples/Xam.Plugin.SimpleBottomDrawer.Samples.Android/Resources/mipmap-xxhdpi/ic_launcher.png)]
 
 # Xam.Plugin.SimpleBottomDrawer
 Just a nice and simple BottomDrawer for your Xamarin Forms project, like how it is implemented on Google Maps.
@@ -27,8 +28,12 @@ You can now use the BottomDrawer to create a panel like this:
 ```
 
     <RelativeLayout>
-  <controls:BottomDrawer
-                Padding="1,4,1,0"
+    <controls:BottomDrawer
+                Padding="0"
+                BackgroundColor="White"
+                ExpandedPercentage="{Binding ExpandedPercentage}"
+                IsExpanded="{Binding IsExpanded}"
+                IsVisible="{Binding IsVisible}"
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=1,
@@ -39,8 +44,8 @@ You can now use the BottomDrawer to create a panel like this:
                                                                       Constant=0}"
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                   Property=Height,
-                                                                  Factor=.9,
-                                                                  Constant=0}">
+                                                                  Factor=1,
+                                                                  Constant=-65}">
 																  
 					 <StackLayout Spacing="6">
                     <BoxView
