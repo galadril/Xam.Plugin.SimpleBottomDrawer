@@ -274,7 +274,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
         {
 
             var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(LockStates[0])));
-            this.TranslateTo(this.X, finalTranslation, 450, Device.RuntimePlatform == Xamarin.Forms.Device.Android ? Easing.SpringOut : null);
+            this.TranslateTo(this.X, finalTranslation, 450, Device.RuntimePlatform == Device.Android ? Easing.SpringOut : null);
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
         public void Open()
         {
             var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(LockStates[LockStates.Length - 1])));
-            this.TranslateTo(this.X, finalTranslation, 150, Device.RuntimePlatform == Xamarin.Forms.Device.Android ? Easing.SpringIn : null);
+            this.TranslateTo(this.X, finalTranslation, 150, Device.RuntimePlatform == Device.Android ? Easing.SpringIn : null);
         }
 
         #endregion Public
