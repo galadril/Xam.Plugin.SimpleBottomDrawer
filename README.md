@@ -1,6 +1,6 @@
 [![Nuget](https://img.shields.io/nuget/v/Xam.Plugin.SimpleBottomDrawer)](https://www.nuget.org/packages/Xam.Plugin.SimpleBottomDrawer) ![Nuget](https://img.shields.io/nuget/dt/Xam.Plugin.SimpleBottomDrawer)
 
-[![Icon](https://raw.githubusercontent.com/galadril/Xam.Plugin.SimpleBottomDrawer/master/Samples/Xam.Plugin.SimpleBottomDrawer.Samples/Xam.Plugin.SimpleBottomDrawer.Samples.Android/Resources/mipmap-xxhdpi/ic_launcher.png)]
+![Icon](https://raw.githubusercontent.com/galadril/Xam.Plugin.SimpleBottomDrawer/master/Samples/Xam.Plugin.SimpleBottomDrawer.Samples/Xam.Plugin.SimpleBottomDrawer.Samples.Android/Resources/mipmap-xxhdpi/ic_launcher.png)
 
 # Xam.Plugin.SimpleBottomDrawer
 Just a nice and simple BottomDrawer for your Xamarin Forms project, like how it is implemented on Google Maps.
