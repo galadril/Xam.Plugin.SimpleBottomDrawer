@@ -98,6 +98,7 @@ You can set/use the next properties
 (see sample project)
 
 
-
+More detailed documentation:
+[Documentation](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/blob/master/Xam.Plugin.SimpleBottomDrawer/doc.md)
 
 
