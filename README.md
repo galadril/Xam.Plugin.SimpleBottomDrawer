@@ -102,3 +102,12 @@ More detailed documentation:
 [Documentation](https://github.com/galadril/Xam.Plugin.SimpleBottomDrawer/blob/master/Xam.Plugin.SimpleBottomDrawer/doc.md)
 
 
+
+
+
+# Donation
+
+If you like to say thanks, you could always buy me a cup of coffee (/beer)!   
+(Thanks!)  
+[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/markheinis)
+
