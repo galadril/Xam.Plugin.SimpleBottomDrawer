@@ -12,6 +12,11 @@ namespace Xam.Plugin.SimpleBottomDrawer
     {
         #region Variables
 
+		/// <summary>
+		/// Needed to save the startposition on iOS
+		/// </summary>
+		private double translationYStart;
+
         /// <summary>
         /// Is the drawer being dragged
         /// </summary>
@@ -176,10 +181,11 @@ namespace Xam.Plugin.SimpleBottomDrawer
             {
                 case GestureStatus.Running:
                     isDragging = true;
+					var Y = (Device.RuntimePlatform == Device.Android ? this.TranslationY : translationYStart) + e.TotalY;
                     // Translate and ensure we don't y + e.TotalY pan beyond the wrapped user interface element bounds.
-                    var translateY = Math.Max(Math.Min(0, this.TranslationY + e.TotalY), -Math.Abs((Height * .25) - Height));
-                    this.TranslateTo(this.X, translateY, 20);
-                    ExpandedPercentage = GetPropertionDistance(e.TotalY + this.TranslationY);
+					var translateY = Math.Max(Math.Min(0, Y), -Math.Abs((Height * .25) - Height));
+					this.TranslateTo(this.X, translateY, 1);
+					ExpandedPercentage = GetPropertionDistance(Y);
                     break;
                 case GestureStatus.Completed:
                     // At the end of the event - snap to the closest location
@@ -193,6 +199,9 @@ namespace Xam.Plugin.SimpleBottomDrawer
                     ExpandedPercentage = GetClosestLockState(e.TotalY + this.TranslationY);
                     isDragging = false;
                     break;
+				case GestureStatus.Started:
+					translationYStart = this.TranslationY;
+					break;
             }
 
             if (ExpandedPercentage > LockStates[LockStates.Length - 1])
@@ -272,7 +281,6 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// </summary>
         public void Dismiss()
         {
-
             var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(LockStates[0])));
             this.TranslateTo(this.X, finalTranslation, 450, Device.RuntimePlatform == Device.Android ? Easing.SpringOut : null);
         }
