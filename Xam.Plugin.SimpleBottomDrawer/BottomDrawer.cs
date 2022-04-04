@@ -222,21 +222,37 @@ namespace Xam.Plugin.SimpleBottomDrawer
             switch (e.StatusType)
             {
                 case GestureStatus.Running:
-                    System.Console.WriteLine("[BottomDrawer] OnPanChanged() - Running");
-
                     isDragging = true;
-					var Y = (Device.RuntimePlatform == Device.Android ? this.TranslationY : translationYStart) + e.TotalY;
+					var Y = (Device.RuntimePlatform == Device.Android
+                                ? this.TranslationY // Frame.TranslationY
+                                : this.translationYStart)
+                            + e.TotalY;
                     // Translate and ensure we don't y + e.TotalY pan beyond the wrapped user interface element bounds.
-					var translateY = Math.Max(Math.Min(0, Y), -Math.Abs((Height * .25) - Height));
-					this.TranslateTo(this.X, translateY, 1);
-					ExpandedPercentage = GetPropertionDistance(Y);
+					var translateY =
+                        Math.Max(
+                               Math.Min(0, Y)
+                            , -Math.Abs((Height * .25) - Height)
+                        );
+
+					this.TranslateTo(x: this.X, y: translateY, length: 1);
+					this.ExpandedPercentage = GetPropertionDistance(Y);
+
+                    System.Console.WriteLine($"[BottomDrawer] OnPanChanged() - Running | ExpandedPercentage=={ExpandedPercentage} | translateY=={translateY}");
                     break;
 
                 case GestureStatus.Completed:
                     System.Console.WriteLine("[BottomDrawer] OnPanChanged() - Completed");
 
                     // At the end of the event - snap to the closest location
-                    var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(GetClosestLockState(e.TotalY + this.TranslationY))));
+                    double finalTranslation =
+                        Math.Max(
+                               Math.Min(0, -1000)
+                            , -Math.Abs(
+                                  getProportionCoordinate(
+                                      GetClosestLockState(e.TotalY + this.TranslationY)
+                                  )
+                               )
+                        );
 
                     // Depending on Swipe Up or Down - change the snapping animation
                     if (DetectSwipeUp(e))
@@ -260,23 +276,33 @@ namespace Xam.Plugin.SimpleBottomDrawer
                             , easing: Easing.SpringOut);
                     }
 
-                    ExpandedPercentage = GetClosestLockState(e.TotalY + this.TranslationY);
-                    isDragging = false;
+                    this.ExpandedPercentage = GetClosestLockState(e.TotalY + this.TranslationY);
+                    this.isDragging = false;
+
+                    System.Console.WriteLine($"[BottomDrawer] OnPanChanged() - Completed | ExpandedPercentage=={ExpandedPercentage} | finalTranslation=={finalTranslation}");
                     break;
 
 				case GestureStatus.Started:
-                    System.Console.WriteLine("[BottomDrawer] OnPanChanged() - Started");
+                    this.translationYStart = this.TranslationY;
 
-                    translationYStart = this.TranslationY;
-					break;
+                    System.Console.WriteLine($"[BottomDrawer] OnPanChanged() - Started | translationYStart=={translationYStart}");
+                    break;
             }
 
-            if (ExpandedPercentage > LockStates[LockStates.Length - 1])
+            if (LockStates.Length <= 0)
             {
-                ExpandedPercentage = LockStates[LockStates.Length - 1];
+                return;
             }
 
-            IsExpanded = ExpandedPercentage > 0;
+            int indexOfLastLockState = LockStates.Length - 1;
+            double lastLockState = LockStates[indexOfLastLockState];
+
+            if (ExpandedPercentage > lastLockState)
+            {
+                ExpandedPercentage = lastLockState;
+            }
+
+            IsExpanded = (ExpandedPercentage > 0);
         }
 
         /// <summary>
