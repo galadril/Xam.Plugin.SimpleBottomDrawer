@@ -38,8 +38,10 @@ namespace Xam.Plugin.SimpleBottomDrawer.Samples.ViewModel
 
         /// <summary>
         /// The bottom drawer lock states
+        ///
+        /// Note: [alex-d] works incorrectly when more than 3 values
         /// </summary>
-        private double[] _LockStates = new double[] { 0, .50, 0.75 };
+        private double[] _LockStates = new double[] { 0, .30, 0.6, 0.95 };
 
         #endregion
 
