@@ -312,16 +312,16 @@ namespace Xam.Plugin.SimpleBottomDrawer
         {
             System.Console.WriteLine("[BottomDrawer] OnTapped()");
 
-            if (!IsExpanded)
+            if (!this.IsExpanded)
             {
                 if (this.LockStates.Length >= 2)
                 {
                     // TODO: [alex-d] why hard-coded [1] index?
                     // -
-                    ExpandedPercentage = LockStates[1];
+                    this.ExpandedPercentage = LockStates[1];
                 }
 
-                IsExpanded = ExpandedPercentage > 0;
+                this.IsExpanded = (this.ExpandedPercentage > 0);
             }
         }
 
@@ -357,7 +357,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
             }
 
             double result = LockStates[closestIndex];
-            System.Console.WriteLine($"[BottomDrawer] GetClosestLockState() | result=={result} | index=={closestIndex}");
+            System.Console.WriteLine($"[BottomDrawer] GetClosestLockState() | current=={current} | result=={result} | index=={closestIndex} | TranslationY=={TranslationY}");
 
             return result;
         }
@@ -388,9 +388,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// </summary>
         public void Dismiss()
         {
-            System.Console.WriteLine("[BottomDrawer] Dismiss()");
-
-            var finalTranslation =
+            double finalTranslation =
                 Math.Max(
                        Math.Min(0, -1000)
                     , -Math.Abs(getProportionCoordinate(LockStates[0]))
@@ -405,6 +403,8 @@ namespace Xam.Plugin.SimpleBottomDrawer
                         ? Easing.SpringOut
                         : null
             );
+
+            System.Console.WriteLine($"[BottomDrawer] Dismiss() | finalTranslation=={finalTranslation}");
         }
 
         /// <summary>
@@ -412,9 +412,7 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// </summary>
         public void Open()
         {
-            System.Console.WriteLine("[BottomDrawer] Open()");
-
-            var finalTranslation =
+            double finalTranslation =
                 Math.Max(
                       Math.Min(0, -1000)
                     , -Math.Abs(getProportionCoordinate(LockStates[LockStates.Length - 1]))
@@ -429,6 +427,8 @@ namespace Xam.Plugin.SimpleBottomDrawer
                         ? Easing.SpringIn
                         : null
             );
+
+            System.Console.WriteLine($"[BottomDrawer] Open() | finalTranslation=={finalTranslation}");
         }
 
         #endregion Public
