@@ -115,7 +115,10 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// <summary>
         /// Make sure we collapse the view on orientation change
         /// </summary>
-        protected override void OnSizeAllocated(double width, double height)
+        protected override void OnSizeAllocated(
+              double width
+            , double height
+        )
         {
             base.OnSizeAllocated(width, height);
             if (width != _width || height != _height)
@@ -137,16 +140,25 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// <param name="bindable">The bindable object</param>
         /// <param name="o">The old value</param>
         /// <param name="n">The new value</param>
-        private static void IsExpandedPropertyChanged(BindableObject bindable, object o, object n)
+        private static void IsExpandedPropertyChanged(
+              BindableObject bindable
+            , object o
+            , object n)
         {
             if (n is bool isExpanded && bindable is BottomDrawer drawer)
             {
                 if (!drawer.isDragging)
                 {
                     if (!isExpanded)
+                    {
+                        System.Console.WriteLine("[BottomDrawer] IsExpandedPropertyChanged() ==> Dismiss()");
                         drawer.Dismiss();
+                    }
                     else
+                    {
+                        System.Console.WriteLine("[BottomDrawer] IsExpandedPropertyChanged() ==> Open()");
                         drawer.Open();
+                    }
                 }
             }
         }
@@ -157,17 +169,44 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// <param name="bindable">The bindable object</param>
         /// <param name="o">The old value</param>
         /// <param name="n">The new value</param>
-        private static void ExpandedPercentageChanged(BindableObject bindable, object o, object n)
+        private static void ExpandedPercentageChanged(
+              BindableObject bindable
+            , object o
+            , object n)
         {
             if (n is double expandValue && bindable is BottomDrawer drawer)
             {
                 if (!drawer.isDragging)
                 {
-                    var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(drawer.getProportionCoordinate(expandValue)));
+                    double proportionY = drawer.getProportionCoordinate(expandValue);
+
+                    var finalTranslation =
+                        Math.Max(
+                              Math.Min(0, -1000)
+                            , -Math.Abs(proportionY)
+                        );
+
+                    System.Console.WriteLine(
+                        $"[BottomDrawer] ExpandedPercentageChanged() ==> proportionY=={proportionY} | finalTranslation=={finalTranslation}");
+
                     if (expandValue < 0)
-                        drawer.TranslateTo(drawer.X, finalTranslation, 250, Easing.SpringIn);
+                    {
+                        drawer.TranslateTo(
+                              x: drawer.X
+                            , y: finalTranslation
+                            , length: 250
+                            , easing: Easing.SpringIn
+                        );
+                    }
                     else
-                        drawer.TranslateTo(drawer.X, finalTranslation, 250, Easing.SpringOut);
+                    {
+                        drawer.TranslateTo(
+                              x: drawer.X
+                            , y: finalTranslation
+                            , length: 250
+                            , easing: Easing.SpringOut
+                        );
+                    }
                 }
             }
         }
@@ -175,11 +214,16 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// <summary>
         /// On pan gesture changed
         /// </summary>
-        private void OnPanChanged(object sender, PanUpdatedEventArgs e)
+        private void OnPanChanged(
+              object              sender
+            , PanUpdatedEventArgs e
+        )
         {
             switch (e.StatusType)
             {
                 case GestureStatus.Running:
+                    System.Console.WriteLine("[BottomDrawer] OnPanChanged() - Running");
+
                     isDragging = true;
 					var Y = (Device.RuntimePlatform == Device.Android ? this.TranslationY : translationYStart) + e.TotalY;
                     // Translate and ensure we don't y + e.TotalY pan beyond the wrapped user interface element bounds.
@@ -187,25 +231,51 @@ namespace Xam.Plugin.SimpleBottomDrawer
 					this.TranslateTo(this.X, translateY, 1);
 					ExpandedPercentage = GetPropertionDistance(Y);
                     break;
+
                 case GestureStatus.Completed:
+                    System.Console.WriteLine("[BottomDrawer] OnPanChanged() - Completed");
+
                     // At the end of the event - snap to the closest location
                     var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(GetClosestLockState(e.TotalY + this.TranslationY))));
 
                     // Depending on Swipe Up or Down - change the snapping animation
                     if (DetectSwipeUp(e))
-                        this.TranslateTo(this.X, finalTranslation, 250, Easing.SpringIn);
+                    {
+                        System.Console.WriteLine("[BottomDrawer] OnPanChanged() - DetectSwipeUp()==true");
+
+                        this.TranslateTo(
+                              x: this.X
+                            , y: finalTranslation
+                            , length: 250
+                            , easing: Easing.SpringIn);
+                    }
                     else
-                        this.TranslateTo(this.X, finalTranslation, 250, Easing.SpringOut);
+                    {
+                        System.Console.WriteLine("[BottomDrawer] OnPanChanged() - DetectSwipeUp()==false");
+
+                        this.TranslateTo(
+                              x: this.X
+                            , y: finalTranslation
+                            , length: 250
+                            , easing: Easing.SpringOut);
+                    }
+
                     ExpandedPercentage = GetClosestLockState(e.TotalY + this.TranslationY);
                     isDragging = false;
                     break;
+
 				case GestureStatus.Started:
-					translationYStart = this.TranslationY;
+                    System.Console.WriteLine("[BottomDrawer] OnPanChanged() - Started");
+
+                    translationYStart = this.TranslationY;
 					break;
             }
 
             if (ExpandedPercentage > LockStates[LockStates.Length - 1])
+            {
                 ExpandedPercentage = LockStates[LockStates.Length - 1];
+            }
+
             IsExpanded = ExpandedPercentage > 0;
         }
 
@@ -214,9 +284,17 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// </summary>
         private void OnTapped(object sender, EventArgs e)
         {
+            System.Console.WriteLine("[BottomDrawer] OnTapped()");
+
             if (!IsExpanded)
             {
-                ExpandedPercentage = LockStates[1];
+                if (this.LockStates.Length >= 2)
+                {
+                    // TODO: [alex-d] why hard-coded [1] index?
+                    // -
+                    ExpandedPercentage = LockStates[1];
+                }
+
                 IsExpanded = ExpandedPercentage > 0;
             }
         }
@@ -252,7 +330,10 @@ namespace Xam.Plugin.SimpleBottomDrawer
                 }
             }
 
-            return LockStates[closestIndex];
+            double result = LockStates[closestIndex];
+            System.Console.WriteLine($"[BottomDrawer] GetClosestLockState() | result=={result} | index=={closestIndex}");
+
+            return result;
         }
 
         /// <summary>
@@ -281,8 +362,23 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// </summary>
         public void Dismiss()
         {
-            var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(LockStates[0])));
-            this.TranslateTo(this.X, finalTranslation, 450, Device.RuntimePlatform == Device.Android ? Easing.SpringOut : null);
+            System.Console.WriteLine("[BottomDrawer] Dismiss()");
+
+            var finalTranslation =
+                Math.Max(
+                       Math.Min(0, -1000)
+                    , -Math.Abs(getProportionCoordinate(LockStates[0]))
+                );
+
+            this.TranslateTo(
+                  x: this.X
+                , y: finalTranslation
+                , length: 450
+                , easing:
+                    Device.RuntimePlatform == Device.Android
+                        ? Easing.SpringOut
+                        : null
+            );
         }
 
         /// <summary>
@@ -290,8 +386,23 @@ namespace Xam.Plugin.SimpleBottomDrawer
         /// </summary>
         public void Open()
         {
-            var finalTranslation = Math.Max(Math.Min(0, -1000), -Math.Abs(getProportionCoordinate(LockStates[LockStates.Length - 1])));
-            this.TranslateTo(this.X, finalTranslation, 150, Device.RuntimePlatform == Device.Android ? Easing.SpringIn : null);
+            System.Console.WriteLine("[BottomDrawer] Open()");
+
+            var finalTranslation =
+                Math.Max(
+                      Math.Min(0, -1000)
+                    , -Math.Abs(getProportionCoordinate(LockStates[LockStates.Length - 1]))
+                );
+
+            this.TranslateTo(
+                  x: this.X
+                , y: finalTranslation
+                , length: 150
+                , easing:
+                    Device.RuntimePlatform == Device.Android
+                        ? Easing.SpringIn
+                        : null
+            );
         }
 
         #endregion Public
