@@ -50,6 +50,7 @@
                 ExpandedPercentage="{Binding ExpandedPercentage}"
                 IsExpanded="{Binding IsExpanded}"
                 IsVisible="{Binding IsVisible}"
+                LockStates="{Binding LockStates}"
                 RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=1,
