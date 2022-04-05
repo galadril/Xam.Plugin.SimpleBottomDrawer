@@ -316,14 +316,10 @@ namespace Xam.Plugin.SimpleBottomDrawer
                             , easing: Easing.SpringOut);
                     }
 
-                    // Note: [alex-d] this.TranslationY might change due to this.TranslateTo()
+                    // Note: [alex-d] |this.TranslationY| seems to not change due to |this.TranslateTo()|
+                    //       so it is ok to reuse the |tmpLockState| value
                     // -
-                    double dragDistanceY2 = e.TotalY + this.TranslationY;
-
-#if DEBUG
-                    System.Console.WriteLine($"[BottomDrawer] OnPanChanged() - call#2 GetClosestLockState({dragDistanceY2})");
-#endif
-                    this.ExpandedPercentage = GetClosestLockStateAbsolute(dragDistanceY2);
+                    this.ExpandedPercentage = tmpLockState;
                     this.isDragging = false;
 
 #if DEBUG
